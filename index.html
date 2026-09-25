@@ -2,63 +2,83 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ICLL V8</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ICLL V8 — Impossible Challenge Levels List</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: white;
-    text-align: center;
-    margin: 0;
-}
-
-#loader {
-    position: fixed;
-    inset: 0;
-    background: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-}
-
-.card {
-    background: #222;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-}
+:root{--bg:#090a10;--panel:#13151f;--panel2:#1a1d29;--border:#303446;--text:#f4f5f7;--muted:#a6a9bb;--red:#ff425c;--green:#43e58b;--yellow:#ffd45a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% -10%,#401421 0%,transparent 35%),var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+#loadingScreen{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;background:#090a10;transition:opacity .35s ease}.loadingTitle{color:var(--red);font-size:38px;font-weight:1000}.loadingText{color:var(--muted);font-size:12px;letter-spacing:3px}#loadingScreen.hide{opacity:0;pointer-events:none}
+header{position:sticky;top:0;z-index:100;background:#090a10ee;border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}nav{max-width:1100px;margin:auto;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;gap:20px}.logo{color:var(--red);font-weight:1000;font-size:22px;letter-spacing:2px}nav a{color:#ddd;text-decoration:none;margin-left:18px;font-size:14px;font-weight:bold}nav a:hover{color:var(--red)}
+main{max-width:1100px;margin:auto;padding:30px 20px}.hero{text-align:center;padding:65px 10px 45px}.eyebrow{color:#ff8497;letter-spacing:4px;font-size:12px;font-weight:900}.hero h1{margin:15px 0;font-size:clamp(38px,7vw,75px);line-height:.98;letter-spacing:-3px;color:var(--red)}.hero p{max-width:650px;margin:0 auto 25px;color:var(--muted);line-height:1.7}.buttons{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+button,.button{border:0;border-radius:10px;padding:12px 17px;background:var(--red);color:#17080d;font-weight:900;cursor:pointer;text-decoration:none}.button.secondary{background:var(--panel2);color:white;border:1px solid var(--border)}button:hover,.button:hover{filter:brightness(1.1)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:25px 0 50px}.stat,.panel{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px}.stat strong{display:block;font-size:28px;color:var(--red)}.stat span{color:var(--muted);font-size:13px}
+section{margin:55px 0}h2{font-size:30px;margin-bottom:8px}.subtitle{color:var(--muted);margin-bottom:20px}.controls{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}input,select,textarea{width:100%;padding:12px;border-radius:9px;border:1px solid #414458;background:#0f1119;color:white;font:inherit}.controls input{flex:1;min-width:200px}.controls select{width:auto}.levelList{display:grid;gap:12px}.level{display:flex;align-items:center;gap:15px;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:17px}.rank{min-width:55px;text-align:center;color:var(--red);font-size:25px;font-weight:1000}.levelInfo{flex:1}.levelInfo h3{margin:0 0 6px}.levelInfo p{margin:3px 0;color:var(--muted);font-size:13px}.tag,.status{display:inline-block;margin-top:8px;padding:5px 9px;border-radius:20px;font-size:11px;font-weight:900}.tag{background:#542638;color:#ff9fb0}.status{margin-left:5px}.accepted{background:#143b29;color:var(--green)}.pending{background:#453817;color:var(--yellow)}.rejected{background:#451b27;color:#ff8295}.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.panel p{color:var(--muted);line-height:1.6}form{display:grid;gap:13px;max-width:700px}label{display:grid;gap:7px;color:#ddd;font-size:13px;font-weight:bold}textarea{min-height:100px;resize:vertical}.reviewBox{margin-top:20px;padding:18px;border-radius:12px;background:#10121a;border:1px solid var(--border)}.check{margin:7px 0;color:var(--muted)}footer{border-top:1px solid var(--border);color:var(--muted);text-align:center;padding:30px 15px;margin-top:70px;font-size:12px}
+@media(max-width:700px){nav{flex-direction:column}nav a{margin:0 7px}.stats,.grid{grid-template-columns:1fr}.level{align-items:flex-start}.rank{min-width:40px}}
 </style>
 </head>
 <body>
-
-<div id="loader">Loading ICLL V8...</div>
-
-<h1>ICLL V8 Demo</h1>
-
-<div class="card">
-    <h2>Level Review</h2>
-    <p id="result">Pending Review</p>
-    <button onclick="reviewLevel()">Review Level</button>
-</div>
-
+<div id="loadingScreen"><div class="loadingTitle">⚡ ICLL V8</div><div class="loadingText">LOADING...</div></div>
+<header><nav><div class="logo">⚡ ICLL</div><div><a href="#list">LIST</a><a href="#rules">RULES</a><a href="#submit">SUBMIT</a><a href="#bot">AUTO BOT</a></div></nav></header>
+<main>
+<div class="hero"><div class="eyebrow">GEOMETRY DASH · COMMUNITY PROJECT</div><h1>IMPOSSIBLE<br>CHALLENGE<br>LEVELS LIST</h1><p>Where impossible Geometry Dash challenges are collected, reviewed and organized by the ICLL community.</p><div class="buttons"><a class="button" href="#list">EXPLORE THE LIST ↓</a><a class="button secondary" href="#submit">SUBMIT A LEVEL</a></div></div>
+<div class="stats"><div class="stat"><strong id="totalLevels">0</strong><span>Levels</span></div><div class="stat"><strong id="acceptedLevels">0</strong><span>Accepted</span></div><div class="stat"><strong id="pendingLevels">0</strong><span>Pending review</span></div></div>
+<section id="list"><h2>THE LIST ⚡</h2><p class="subtitle">Levels currently registered in the ICLL.</p><div class="controls"><input id="search" placeholder="Search levels or creators..."><select id="category"><option value="all">All categories</option><option value="physical">Physically impossible</option><option value="theory">Theoretically possible</option></select></div><div id="levelList" class="levelList"></div></section>
+<section id="rules"><h2>WHAT COUNTS?</h2><p class="subtitle">Basic rules used by the automatic reviewer.</p><div class="grid"><div class="panel"><h3>💀 PHYSICALLY IMPOSSIBLE</h3><p>A challenge that cannot be completed under the defined game conditions.</p></div><div class="panel"><h3>⚡ THEORETICALLY POSSIBLE</h3><p>A challenge that has a theoretical solution but may be beyond realistic human ability.</p></div></div><div class="panel" style="margin-top:15px"><p><strong>Minimum duration:</strong> 5 seconds.</p><p><strong>Required information:</strong> level name, creator, duration and explanation.</p><p>The automatic bot performs objective checks. It does not pretend to verify gameplay that it cannot actually watch.</p></div></section>
+<section id="submit"><h2>SUBMIT A CHALLENGE</h2><p class="subtitle">The bot reviews the submission immediately.</p><div class="panel"><form id="submissionForm"><label>Level name<input name="name" required></label><label>Creator<input name="creator" required></label><label>Level ID<input name="id" inputmode="numeric" pattern="[0-9]*" placeholder="Example: 149435108"></label><label>Category<select name="type"><option value="physical">Physically impossible</option><option value="theory">Theoretically possible</option></select></label><label>Duration in seconds<input name="duration" type="number" min="0" step="0.01" required></label><label>Video URL<input name="video" type="url" placeholder="Optional"></label><label>Why is it impossible?<textarea name="reason" required></textarea></label><button type="submit">SUBMIT & REVIEW</button></form><div id="reviewResult" class="reviewBox" hidden><h3>🤖 REVIEW BOT RESULT</h3><div id="reviewStatus"></div><div id="reviewChecks"></div></div></div></section>
+<section id="bot"><h2>🤖 AUTO REVIEW BOT</h2><div class="panel"><p>The ICLL bot performs automatic checks on submissions.</p><p>🟢 <strong>Accepted</strong> — all automatic requirements passed.</p><p>🟡 <strong>Pending review</strong> — the submission needs human/gameplay verification.</p><p>🔴 <strong>Rejected</strong> — a required rule clearly failed.</p></div></section>
+</main>
+<footer>ICLL V8 ⚡ · Fan-made Geometry Dash community project · Not affiliated with RobTop Games.</footer>
 <script>
-window.addEventListener("load", () => {
-    setTimeout(() => {
-        document.getElementById("loader").style.display = "none";
-    }, 2000);
-});
-
-function reviewLevel() {
-    const accepted = Math.random() > 0.5;
-
-    document.getElementById("result").textContent =
-        accepted ? "Accepted ✅" : "Rejected ❌";
+(function(){
+const s=document.getElementById("loadingScreen");
+setTimeout(()=>{if(s){s.classList.add("hide");setTimeout(()=>s.remove(),400)}},800);
+setTimeout(()=>{const x=document.getElementById("loadingScreen");if(x){x.classList.add("hide");setTimeout(()=>x.remove(),400)}},3000);
+})();
+const KEY="icll-v8-submissions";
+const featured=[{name:"Impossible chall 1",creator:"XslayerDemonX",id:"149435108",type:"physical",duration:20,video:"",reason:"because yes",status:"Pending review"}];
+let saved=[];try{saved=JSON.parse(localStorage.getItem(KEY)||"[]");if(!Array.isArray(saved))saved=[]}catch(e){}
+let levels=featured.concat(saved);
+function reviewLevel(l){
+const checks=[
+["Level name exists",String(l.name||"").trim().length>0],
+["Creator exists",String(l.creator||"").trim().length>0],
+["Duration is at least 5 seconds",Number.isFinite(Number(l.duration))&&Number(l.duration)>=5],
+["Impossibility explanation exists",String(l.reason||"").trim().length>0],
+["Level ID is valid when supplied",!l.id||/^\d+$/.test(String(l.id).trim())]
+];
+const failed=checks.filter(x=>!x[1]);
+if(!failed.length){l.status="Accepted";l.reviewReason="All automatic checks passed."}
+else{l.status="Rejected";l.reviewReason=failed.map(x=>x[0]).join("; ")}
+return checks;
 }
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function status(s){const c=s==="Accepted"?"accepted":s==="Rejected"?"rejected":"pending";return `<span class="status ${c}">${esc(s)}</span>`}
+function render(){
+const q=document.getElementById("search").value.toLowerCase(),cat=document.getElementById("category").value,box=document.getElementById("levelList");box.innerHTML="";
+levels.filter(l=>(l.name+" "+l.creator).toLowerCase().includes(q)&&(cat==="all"||l.type===cat)).forEach(l=>{
+const el=document.createElement("div");el.className="level";
+el.innerHTML=`<div class="rank">⏳</div><div class="levelInfo"><h3>${esc(l.name)}</h3><p>Creator: ${esc(l.creator)}</p><p>ID: ${esc(l.id||"Not supplied")} · ${esc(l.duration)} seconds</p><span class="tag">${l.type==="theory"?"⚡ THEORETICALLY POSSIBLE":"💀 PHYSICALLY IMPOSSIBLE"}</span> ${status(l.status)}${l.reviewReason?`<p>🤖 ${esc(l.reviewReason)}</p>`:""}</div>`;
+if(l.video){const a=document.createElement("a");a.href=l.video;a.target="_blank";a.rel="noopener";a.className="button secondary";a.textContent="WATCH";el.append(a)}
+box.append(el);
+});
+document.getElementById("totalLevels").textContent=levels.length;
+document.getElementById("acceptedLevels").textContent=levels.filter(x=>x.status==="Accepted").length;
+document.getElementById("pendingLevels").textContent=levels.filter(x=>x.status==="Pending review").length;
+}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(levels.slice(1)))}catch(e){}}
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("category").addEventListener("change",render);
+document.getElementById("submissionForm").addEventListener("submit",e=>{
+e.preventDefault();const f=new FormData(e.target),l={name:String(f.get("name")||"").trim(),creator:String(f.get("creator")||"").trim(),id:String(f.get("id")||"").trim(),type:String(f.get("type")),duration:Number(f.get("duration")),video:String(f.get("video")||"").trim(),reason:String(f.get("reason")||"").trim(),status:"Pending review"};
+const checks=reviewLevel(l);levels.push(l);save();render();
+document.getElementById("reviewResult").hidden=false;document.getElementById("reviewStatus").innerHTML=status(l.status)+"<br><br>"+esc(l.reviewReason);
+document.getElementById("reviewChecks").innerHTML=checks.map(c=>`<div class="check">${c[1]?"✅":"❌"} ${esc(c[0])}</div>`).join("");
+document.getElementById("reviewResult").scrollIntoView({behavior:"smooth"});e.target.reset();
+});
+reviewLevel(levels[0]);save();render();
 </script>
-
 </body>
-</html>
+</html>'''
+path=Path("/mnt/data/ICLL_V8_enterable_review_bot.html")
+path.write_text(html,encoding="utf-8")
+print(path)
