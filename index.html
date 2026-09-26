@@ -16,6 +16,20 @@
 /* V9.1 Demon Selector */
 .demon-launch{width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;background:#281b31;color:#fff;border:2px solid #8954b4;padding:10px 15px;min-height:74px;text-align:left;border-radius:12px}.demon-launch:hover{border-color:#d6b8ff;box-shadow:0 0 13px #ffffff22}.demon-launch img{height:50px;width:55px;object-fit:contain;border-radius:8px}.demon-backdrop{position:fixed;inset:0;z-index:1000;background:#020714d9;display:flex;align-items:center;justify-content:center;padding:18px;overflow:auto}.demon-modal{position:relative;width:min(960px,100%);max-height:min(92vh,850px);overflow:auto;border:5px solid #f7f4e7;outline:3px solid #23130d;border-radius:19px;background:#935435;box-shadow:0 0 0 8px #4d2619,0 22px 70px #000c;padding:18px 26px 24px;text-align:center;color:white}.demon-modal h2{font-size:clamp(28px,5vw,42px);margin:0 52px 2px;text-shadow:3px 4px 0 #4a1e0e,-1px -1px #2d160e;letter-spacing:.4px}.demon-modal>p{margin:0 0 20px;font-size:clamp(14px,2.4vw,19px);font-weight:900;text-shadow:2px 2px #44230f}.demon-close{position:sticky;float:right;top:0;z-index:2;margin:-4px -10px 0 0;width:44px;height:44px;padding:0;border:3px solid white;border-radius:50%;background:#a7d936;color:#35260b;font-size:26px;box-shadow:0 3px 0 #4b3e1b}.demon-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px 5px;clear:both}.demon-option{background:transparent;color:white;border:2px solid transparent;border-radius:14px;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px 9px;font-size:clamp(10px,1.35vw,14px);font-weight:1000;line-height:1.1;text-transform:uppercase;text-shadow:2px 2px #30160d,-1px -1px #30160d;transition:box-shadow .15s,background .15s,transform .15s}.demon-option img{display:block;width:min(100%,78px);height:68px;object-fit:contain;mix-blend-mode:normal;border-radius:5px}.demon-option:hover,.demon-option:focus-visible{background:#ffffff13;border-color:#ffffff55;box-shadow:0 0 12px 3px #ffffff65;transform:translateY(-2px);filter:none}.demon-option.selected{background:#ffffff23;border-color:#fff;box-shadow:0 0 12px #ffffff7a}.demon-bottom{border-top:2px solid #ffffff66;margin-top:15px;padding-top:13px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;font-weight:800}.demon-bottom button:disabled{opacity:.45;cursor:not-allowed}.demon-bottom button{background:#b8e83e;color:#1b2910}.demon{display:inline-flex;align-items:center;gap:5px}.demon img{height:25px;width:27px;object-fit:contain;border-radius:4px}
 @media(max-width:700px){.demon-modal{padding:15px 8px}.demon-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}.demon-option img{height:57px;width:65px}.demon-option{font-size:11px}.demon-bottom{flex-wrap:wrap;justify-content:center;text-align:center}.demon-modal h2{margin:0 32px 4px}}
+
+/* V9.1 gray demon selector + gentle opening animation */
+.demon-launch{background:#292b33;border-color:#737781;transition:background .18s,border-color .18s,box-shadow .18s}
+.demon-launch:hover,.demon-launch:focus-visible{background:#353840;border-color:#d3d5da;box-shadow:0 0 11px #ffffff29}
+.demon-backdrop{background:#0b0d14c9}
+.demon-modal{background:linear-gradient(155deg,#777b83,#52565f 55%,#383c46);border-color:#c8cbd0;outline-color:#292c33;box-shadow:0 0 0 5px #30333b,0 22px 65px #000a;animation:demonAppear .26s cubic-bezier(.2,.8,.2,1) both}
+.demon-modal h2{color:#fff;text-shadow:2px 3px 0 #34363b,-1px -1px #34363b}
+.demon-modal>p{text-shadow:1px 2px #373a42}
+.demon-close{background:#8c919b;color:#fff;border-color:#e2e4e8;box-shadow:0 3px 0 #40444c}
+.demon-bottom button{background:#e1e3e8;color:#262932}
+.demon-option:hover,.demon-option:focus-visible{background:#ffffff16;border-color:#ffffff66;box-shadow:0 0 9px 2px #ffffff40}
+.demon-option.selected{background:#ffffff24;border-color:#e9e9ec;box-shadow:0 0 10px #ffffff65}
+@keyframes demonAppear{from{opacity:0;transform:translateY(12px) scale(.975)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.demon-modal{animation:none}}
 </style>
 </head>
 <body>
@@ -35,7 +49,7 @@
 <button type="button" class="demon-close" id="closeDemon" aria-label="Close demon selector">✕</button>
 <h2 id="demonTitle">Demon Selector</h2>
 <p id="demonSubtitle">select your impossible demon difficult</p>
-<p style="font-size:10px;color:#c9bcb8;margin:3px 0 14px;letter-spacing:.2px;">Used from Demons in Between mod demon icons</p>
+<p style="font-size:10px;color:#e1e2e6;margin:3px 0 14px;letter-spacing:.2px;">Used from Demons in Between mod demon icons</p>
 <div class="demon-grid" id="demonGrid"></div>
 <div class="demon-bottom"><span id="demonSelectionInfo">Choose one of the 30 demon difficulties</span><button type="button" id="confirmDemon" disabled>SELECT DEMON</button></div>
 </div></div>
